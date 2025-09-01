@@ -34,7 +34,11 @@
       "Bash(netstat:*)",
       "Bash(npm run lint)",
       "Bash(npm cache clean:*)",
-      "Bash(del nul)"
+      "Bash(del nul)",
+      "Bash(git config:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": [],

@@ -70,7 +70,8 @@ export async function GET(request: Request) {
         totalDeleted += deleted.count;
 
         // Clean up old usage data (older than 6 months)
-        const usageCutoff = subDays(new Date(), 180);
+        const usageCutoff = new Date();
+        usageCutoff.setDate(usageCutoff.getDate() - 180);
         await prisma.usageDaily.deleteMany({
           where: {
             userId: user.id,
