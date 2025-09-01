@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       
       case 'invoice.payment_failed': {
         const invoice = event.data.object as Stripe.Invoice;
-        if (invoice.subscription) {
+        if (invoice.subscription && typeof invoice.subscription === 'string') {
           console.log('💳 Payment failed for subscription:', invoice.subscription);
           // Could implement payment retry logic here
         }
