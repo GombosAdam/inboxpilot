@@ -604,8 +604,7 @@ export function ModernEmailList({
                   <button
                     onClick={() => {
                       const selectedEmailObjects = emails.filter(email => selectedEmails.has(email.id));
-                      const selectedEmailIds = Array.from(selectedEmails);
-                      onEmailAction?.('bulk-mark-as-read', selectedEmailObjects[0], selectedEmailIds);
+                      onEmailAction?.('bulk-mark-as-read', selectedEmailObjects[0]);
                     }}
                     className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors"
                   >
