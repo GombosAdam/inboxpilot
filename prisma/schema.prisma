@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                  String         @id @default(cuid())
+  email               String         @unique
+  emailVerified       DateTime?
+  name                String?
+  image               String?
+  createdAt           DateTime       @default(now())
+  
+  // Billing (Stripe)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  subscriptionStatus   String         @default("inactive")
+  subscriptionPlan     String         @default("Free")
+  
+  // Legacy billing fields (for backward compatibility)
+  lemonCustomerId      String?
+  lemonSubscriptionId  String?
+  
+  // Gmail OAuth
+  googleEmail         String?
+  googleRefreshToken  String?        @db.Text
+  
+  // AI usage & settings
+  dailyQuota          Int            @default(300)
+  
+  accounts            Account[]
+  sessions            Session[]
+  summaries           EmailSummary[]
+  usageDaily          UsageDaily[]
+  settings            UserSettings?
+}
+
+model EmailSummary {
+  id             String    @id @default(cuid())
+  userId         String
+  gmailMessageId String
+  sender         String
+  subject        String
+  snippet        String?
+  summary        String
+  suggestedReply String?
+  priority       String
+  label          String
+  receivedAt     DateTime  @default(now()) // Actual Gmail email date
+  createdAt      DateTime  @default(now()) // When processed by our system
+  archived       Boolean   @default(false) // Soft delete flag
+  archivedAt     DateTime? // When it was archived
+  read           Boolean   @default(false) // Read status in our app
+  readAt         DateTime? // When it was marked as read
+  
+  user User @relation(fields: [userId], references: [id])
+  
+  @@unique([userId, gmailMessageId])
+  @@index([userId, receivedAt])
+  @@index([userId, archived])
+  @@index([userId, read])
+}
+
+model UsageDaily {
+  userId        String
+  date          DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  prompts       Int      @default(0)
+  emailsScanned Int      @default(0)
+  emailsLabeled Int      @default(0)
+  
+  user User @relation(fields: [userId], references: [id])
+  
+  @@id([userId, date])
+}
+
+model UserSettings {
+  userId          String  @id
+  byoApiKey       Boolean @default(false)
+  anthropicApiKey String? @db.Text
+  retainDays      Int     @default(14)
+  
+  user User @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

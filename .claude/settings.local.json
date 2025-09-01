@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(dir \"C:\\Claude\\AI services\\AI Gmail Sorter\")",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)",
+      "Bash(taskkill:*)",
+      "Bash(rd:*)",
+      "Bash(npm run prisma:generate:*)",
+      "Bash(node:*)",
+      "Bash(npx tsc:*)",
+      "Bash(grep:*)",
+      "Bash(timeout:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next build:*)",
+      "Bash(dir:*)",
+      "Bash(if [ -f .env.local ])",
+      "Bash(then echo \".env.local exists\")",
+      "Bash(else echo \".env.local not found\")",
+      "Bash(fi)",
+      "Bash(mkdir:*)",
+      "Bash(del \"C:\\Claude\\AI services\\AI Gmail Sorter\\src\\app\\favicon.ico\")",
+      "Bash(npx next lint:*)",
+      "Bash(netstat:*)",
+      "Bash(npm run lint)",
+      "Bash(npm cache clean:*)",
+      "Bash(del nul)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\"
+    ]
+  }
+}

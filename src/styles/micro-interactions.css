@@ -1,0 +1,400 @@
+/* InboxPilot Sleek Modern Micro-interactions */
+
+/* Modern gradient button with glow effect */
+.btn-modern-primary {
+  @apply relative overflow-hidden;
+  background: linear-gradient(135deg, #6D28D9, #8B5CF6);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(109, 40, 217, 0.1);
+}
+
+.btn-modern-primary:hover {
+  background: linear-gradient(135deg, #5B21B6, #7C3AED);
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.25), 0 0 0 1px rgba(109, 40, 217, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-modern-primary:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
+.btn-secondary-modern {
+  @apply transition-all duration-200 hover:shadow-sm hover:border-purple-300 hover:bg-purple-50;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern card effects with sophisticated glassmorphism */
+.card-modern {
+  @apply transition-all duration-300;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 32px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.card-modern:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px) saturate(200%);
+  box-shadow: 
+    0 16px 40px rgba(109, 40, 217, 0.12),
+    0 0 0 1px rgba(109, 40, 217, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.card-hero-modern {
+  @apply transition-all;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+  backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(109, 40, 217, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.card-hero-modern:hover {
+  transform: translateY(-4px) scale(1.01);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.9));
+  backdrop-filter: blur(28px) saturate(220%);
+  box-shadow: 
+    0 24px 60px rgba(109, 40, 217, 0.15),
+    0 0 0 1px rgba(109, 40, 217, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Modern metric cards with glassmorphism and gradient accents */
+.metric-card-modern {
+  @apply transition-all duration-300;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 250, 252, 0.7));
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.metric-card-modern:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+  backdrop-filter: blur(20px) saturate(200%);
+  box-shadow: 
+    0 12px 32px rgba(109, 40, 217, 0.08),
+    0 0 0 1px rgba(109, 40, 217, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.metric-number-modern {
+  background: linear-gradient(135deg, #0F172A, #374151);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.metric-card-modern:hover .metric-number-modern {
+  background: linear-gradient(135deg, #6D28D9, #14B8A6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metric-icon-modern {
+  @apply transition-all duration-200;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+}
+
+.metric-card-modern:hover .metric-icon-modern {
+  background: linear-gradient(135deg, #EDE9FE, #DBEAFE);
+  transform: scale(1.05);
+}
+
+/* Modern progress bar with shimmer effect */
+.progress-bar-modern {
+  transition: width 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, #6D28D9, #8B5CF6, #14B8A6);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-modern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Loading states */
+.loading-fade {
+  animation: fadeInUp 500ms ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Email row hover effect */
+.email-row {
+  @apply transition-all duration-200;
+  transition-timing-function: ease-out;
+}
+
+.email-row:hover {
+  @apply bg-indigo-50/30 border-l-4 border-l-indigo-500;
+}
+
+/* Modern sync button with gradient shift and glow */
+.sync-button-modern {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #6D28D9, #8B5CF6);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sync-button-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sync-button-modern:hover {
+  background: linear-gradient(135deg, #5B21B6, #7C3AED);
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.4);
+  transform: translateY(-1px);
+}
+
+.sync-button-modern:hover::before {
+  left: 100%;
+}
+
+.sync-button-modern:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
+/* Syncing state animation */
+.sync-active {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(109, 40, 217, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(109, 40, 217, 0.6);
+  }
+}
+
+/* Tab navigation smooth underline */
+.tab-active {
+  position: relative;
+}
+
+.tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px 1px 0 0;
+  animation: slideIn 200ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Floating elements */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Modern status indicators */
+.status-connected {
+  background: linear-gradient(135deg, #059669, #10B981);
+  animation: connected-pulse 3s ease-in-out infinite;
+}
+
+@keyframes connected-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.status-indicator-modern {
+  background: linear-gradient(135deg, #EDE9FE, #DBEAFE);
+  border: 2px solid rgba(109, 40, 217, 0.2);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern staggered entrance animations */
+.fade-in-up {
+  animation: fadeInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 350ms; }
+.stagger-8 { animation-delay: 400ms; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Advanced Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.glass-navbar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 1px 12px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.glass-gradient-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-gradient-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(109, 40, 217, 0.3), transparent);
+}
+
+.frosted-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(200%) brightness(110%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.frosted-card:hover {
+  backdrop-filter: blur(20px) saturate(220%) brightness(115%);
+  box-shadow: 
+    0 16px 56px rgba(109, 40, 217, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Smooth focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white;
+}
+
+/* Success animation */
+.success-checkmark {
+  animation: checkmark 500ms ease-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Notification slide in */
+.notification-slide {
+  animation: slideInRight 300ms ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
