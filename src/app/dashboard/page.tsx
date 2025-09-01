@@ -2,6 +2,7 @@
 
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { Mail, TrendingUp, Briefcase, CheckCircle, Settings, LogOut, User, Sparkles, Zap, Clock, BarChart3, AlertCircle, Building2, Tag, ArrowRight, Trash2 } from 'lucide-react';
 import { Brand } from '@/components/Brand';
@@ -33,7 +34,7 @@ interface CleanupData {
   emailsToArchive: number;
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -819,5 +820,15 @@ export default function DashboardPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+    </div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }

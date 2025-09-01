@@ -1,6 +1,7 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { PlanPageSkeleton, ChartSkeleton } from '@/components/SkeletonLoaders';
 import { AnalyticsLoadingState, PageLoadingState } from '@/components/ProcessLoadingStates';
@@ -64,7 +65,7 @@ interface UsageData {
 
 const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export default function PlanPage() {
+function PlanContent() {
   const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -918,5 +919,15 @@ export default function PlanPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function PlanPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+    </div>}>
+      <PlanContent />
+    </Suspense>
   );
 }
