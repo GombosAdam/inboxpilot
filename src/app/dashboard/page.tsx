@@ -3,7 +3,7 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Mail, TrendingUp, Briefcase, CheckCircle, Settings, LogOut, User, Sparkles, Zap, Clock, BarChart3, AlertCircle, Building2, Tag, ArrowRight, Trash2 } from 'lucide-react';
 import { Brand } from '@/components/Brand';
 
@@ -49,23 +49,23 @@ function DashboardContent() {
   const [cleanupData, setCleanupData] = useState<CleanupData | null>(null);
   const [cleanupLoading, setCleanupLoading] = useState(false);
 
-  useEffect(() => {
-    if (status === 'loading') {
-      // Still loading, do nothing
-      return;
+  const fetchUsageData = useCallback(async () => {
+    try {
+      const response = await fetch('/api/check-usage');
+      if (response.ok) {
+        const data = await response.json();
+        setUsageData(data);
+      } else {
+        console.error('Failed to fetch usage data:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Failed to fetch usage data:', error);
+    } finally {
+      setDataLoaded(true);
     }
-    
-    if (status === 'unauthenticated' || !session) {
-      router.push('/auth/signin');
-    } else if (status === 'authenticated' && session) {
-      handleSubscriptionSuccess();
-      fetchUsageData();
-      fetchEmailStats();
-      fetchCleanupData();
-    }
-  }, [session, status, router]);
+  }, []);
 
-  const handleSubscriptionSuccess = async () => {
+  const handleSubscriptionSuccess = useCallback(async () => {
     const subscription = searchParams.get('subscription');
     const plan = searchParams.get('plan');
     const isDev = searchParams.get('dev');
@@ -94,25 +94,9 @@ function DashboardContent() {
         console.error('Error upgrading subscription:', error);
       }
     }
-  };
+  }, [searchParams, router, fetchUsageData]);
 
-  const fetchUsageData = async () => {
-    try {
-      const response = await fetch('/api/check-usage');
-      if (response.ok) {
-        const data = await response.json();
-        setUsageData(data);
-      } else {
-        console.error('Failed to fetch usage data:', response.status, response.statusText);
-      }
-    } catch (error) {
-      console.error('Failed to fetch usage data:', error);
-    } finally {
-      setDataLoaded(true);
-    }
-  };
-
-  const fetchEmailStats = async () => {
+  const fetchEmailStats = useCallback(async () => {
     try {
       const response = await fetch('/api/emails');
       if (response.ok) {
@@ -129,9 +113,9 @@ function DashboardContent() {
     } catch (error) {
       console.error('Failed to fetch email stats:', error);
     }
-  };
+  }, []);
 
-  const fetchCleanupData = async () => {
+  const fetchCleanupData = useCallback(async () => {
     try {
       const response = await fetch('/api/emails/cleanup');
       if (response.ok) {
@@ -143,7 +127,23 @@ function DashboardContent() {
     } catch (error) {
       console.error('Failed to fetch cleanup data:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (status === 'loading') {
+      // Still loading, do nothing
+      return;
+    }
+    
+    if (status === 'unauthenticated' || !session) {
+      router.push('/auth/signin');
+    } else if (status === 'authenticated' && session) {
+      handleSubscriptionSuccess();
+      fetchUsageData();
+      fetchEmailStats();
+      fetchCleanupData();
+    }
+  }, [session, status, router, handleSubscriptionSuccess, fetchUsageData, fetchEmailStats, fetchCleanupData]);
 
   const handleCleanup = async () => {
     if (!cleanupData?.emailsToArchive || cleanupData.emailsToArchive === 0) {

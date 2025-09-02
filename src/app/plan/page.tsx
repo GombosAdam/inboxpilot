@@ -2,7 +2,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { PlanPageSkeleton, ChartSkeleton } from '@/components/SkeletonLoaders';
 import { AnalyticsLoadingState, PageLoadingState } from '@/components/ProcessLoadingStates';
 
@@ -73,16 +73,21 @@ function PlanContent() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
 
-  useEffect(() => {
-    if (!session) {
-      router.push('/auth/signin');
-    } else {
-      fetchUsageData();
-      handlePlanChangeSuccess();
+  const fetchUsageData = useCallback(async () => {
+    try {
+      const response = await fetch('/api/usage');
+      if (response.ok) {
+        const data = await response.json();
+        setUsageData(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch usage data:', error);
+    } finally {
+      setLoading(false);
     }
-  }, [session, router]);
+  }, []);
 
-  const handlePlanChangeSuccess = async () => {
+  const handlePlanChangeSuccess = useCallback(async () => {
     const subscription = searchParams.get('subscription');
     const plan = searchParams.get('plan');
     const isDev = searchParams.get('dev');
@@ -96,21 +101,17 @@ function PlanContent() {
         alert(`🎉 Successfully switched to ${plan} plan! Check your new limits.`);
       }, 1000);
     }
-  };
+  }, [searchParams, router, fetchUsageData]);
 
-  const fetchUsageData = async () => {
-    try {
-      const response = await fetch('/api/usage');
-      if (response.ok) {
-        const data = await response.json();
-        setUsageData(data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch usage data:', error);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (!session) {
+      router.push('/auth/signin');
+    } else {
+      fetchUsageData();
+      handlePlanChangeSuccess();
     }
-  };
+  }, [session, router, fetchUsageData, handlePlanChangeSuccess]);
+
 
   const handleSubscribe = async (plan: string = 'starter') => {
     try {
